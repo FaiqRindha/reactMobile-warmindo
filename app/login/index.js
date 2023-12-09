@@ -1,26 +1,32 @@
 import React, { useState } from "react";
-import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { auth, signInWithEmailAndPassword } from "../config/FIREBASE"; // Correct import
+import { Image } from "react-native";
 
-const Login = ({ navigation }) => {
-    const [username, setUsername] = useState("");
+const Login = () => {
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleLogin = () => {
-        // Implement your login logic here
-
-        // After successful login, navigate to the Dashboard screen
-        navigation.navigate("Dashboard");
+    const handleLogin = async () => {
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+            console.log(user);
+            navigation.navigate("dashboard");
+        } catch (error) {
+            alert(error.message);
+        }
     };
 
     return (
         <View style={styles.container}>
             <View style={styles.imageContainer}></View>
-            <Image source={require('../assets/indomie.png')} style={styles.image} />
+            <Image source={require("../assets/indomie.png")} style={styles.image} />
             <Text style={styles.title}>WARMINDO INSPIRASI INDONESIA</Text>
             <TextInput
                 style={styles.input}
                 placeholder="Username"
-                onChangeText={(text) => setUsername(text)}
+                onChangeText={(text) => setEmail(text)}
             />
             <TextInput
                 style={styles.input}
@@ -34,6 +40,7 @@ const Login = ({ navigation }) => {
         </View>
     );
 };
+
 
 const styles = StyleSheet.create({
     container: {
@@ -77,7 +84,6 @@ const styles = StyleSheet.create({
         marginBottom: 0,
     },
     imageContainer: {
-        // Add styles for your image container if needed
     },
 });
 
