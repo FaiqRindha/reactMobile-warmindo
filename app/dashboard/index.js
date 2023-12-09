@@ -4,7 +4,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 const Dashboard = () => {
     // Penggunaan data palsu sebagai contoh
     const userName = "Fa'iq Rindha Maulana";
-    const userRole = "Admin";  // Ganti dengan peran pengguna yang sesuai
+    const userRole = "Admin";  // Ganti dengan peran pengguna yang 
 
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#D80032' }}>
